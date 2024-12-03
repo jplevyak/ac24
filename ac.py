@@ -56,3 +56,21 @@ for l in open("2", "r").readlines():
        if i == len(x) - 2:
            t += 1
 print('2b', t)
+
+import re
+t = 0
+for x in re.findall('mul\(\d\d?\d?,\d\d?\d?\)', open("3", "r").read()):
+  _, a, b, _  = re.split('\(|,|\)', x)
+  t += int(a) * int(b)
+print("3a", t)
+
+t = 0
+e = True
+for x in re.findall('mul\(\d\d?\d?,\d\d?\d?\)|do\(\)|don\'t\(\)', open("3", "r").read()):
+  if x.startswith('do'):
+    e = x == 'do()'
+    continue
+  if e:
+    _, a, b, _  = re.split('\(|,|\)', x)
+    t += int(a) * int(b)
+print("3b", t)
