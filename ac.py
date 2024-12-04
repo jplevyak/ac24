@@ -74,3 +74,47 @@ for x in re.findall('mul\(\d\d?\d?,\d\d?\d?\)|do\(\)|don\'t\(\)', open("3", "r")
     _, a, b, _  = re.split('\(|,|\)', x)
     t += int(a) * int(b)
 print("3b", t)
+
+p = open("4", "r").readlines()
+
+def get(x, y):
+    if y < 0 or y >= len(p) or x < 0 or x >= len(p[y]):
+        return None
+    return p[y][x]
+
+D = [(1, 0), (1, 1), (1, -1), (0, -1), (0, 1), (-1, 0), (-1, 1), (-1, -1)]
+M = "MAS"
+t = 0
+for y in range(len(p)):
+    for x in range(len(p[y])):
+        if p[y][x] == 'X':
+            for d in D:
+                xx, yy = x, y
+                found = True
+                for m in M:
+                    xx = xx + d[0]
+                    yy = yy + d[1]
+                    if get(xx, yy) != m:
+                        found = False
+                        break
+                if found:
+                    t += 1
+print("4a", t)
+
+D = [(-1, -1), (1, 1), (-1, 1), (1, -1)]
+M = ["MSMS", "MSSM", "SMSM", "SMMS"]
+t = 0
+for y in range(len(p)):
+    for x in range(len(p[y])):
+        if p[y][x] == 'A':
+            for mm in M:
+                found = True
+                for i in range(len(D)):
+                    d = D[i]
+                    m = mm[i]
+                    if get(x + d[0], y + d[1]) != m:
+                        found = False
+                        break
+                if found:
+                    t += 1
+print("4b", t)
