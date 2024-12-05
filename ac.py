@@ -74,3 +74,55 @@ for x in re.findall('mul\(\d\d?\d?,\d\d?\d?\)|do\(\)|don\'t\(\)', open("3", "r")
     _, a, b, _  = re.split('\(|,|\)', x)
     t += int(a) * int(b)
 print("3b", t)
+
+from collections import defaultdict
+
+t = 0
+u = False
+o = defaultdict(list)
+for l in open("4", "r").readlines():
+    l = l.strip()
+    if len(l) < 1:
+        u = True
+        continue
+    if not u:
+        a,b = l.split('|')
+        o[int(b)].append(int(a))
+    else:
+        bad = False
+        p = l.split(',')
+        for i in range(len(p)):
+            if bad:
+                break
+            for j in range(i+1,len(p)):
+                if int(p[j]) in o[int(p[i])]:
+                    bad = True
+                    break
+        if not bad:
+            t += int(p[len(p)//2])
+
+print("4a", t)
+
+t = 0
+u = False
+o = defaultdict(list)
+for l in open("4", "r").readlines():
+    l = l.strip()
+    if len(l) < 1:
+        u = True
+        continue
+    if not u:
+        a,b = l.split('|')
+        o[int(b)].append(int(a))
+    else:
+        bad = False
+        p = l.split(',')
+        for i in range(len(p)):
+            for j in range(i+1,len(p)):
+                if int(p[j]) in o[int(p[i])]:
+                    bad = True
+                    p[j],p[i] = p[i],p[j]
+        if bad:
+            t += int(p[len(p)//2])
+
+print("4b", t)
