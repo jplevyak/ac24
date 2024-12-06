@@ -118,3 +118,55 @@ for y in range(len(p)):
                 if found:
                     t += 1
 print("4b", t)
+
+from collections import defaultdict
+
+t = 0
+u = False
+o = defaultdict(list)
+for l in open("5", "r").readlines():
+    l = l.strip()
+    if len(l) < 1:
+        u = True
+        continue
+    if not u:
+        a,b = l.split('|')
+        o[int(b)].append(int(a))
+    else:
+        bad = False
+        p = l.split(',')
+        for i in range(len(p)):
+            if bad:
+                break
+            for j in range(i+1,len(p)):
+                if int(p[j]) in o[int(p[i])]:
+                    bad = True
+                    break
+        if not bad:
+            t += int(p[len(p)//2])
+
+print("5a", t)
+
+t = 0
+u = False
+o = defaultdict(list)
+for l in open("5", "r").readlines():
+    l = l.strip()
+    if len(l) < 1:
+        u = True
+        continue
+    if not u:
+        a,b = l.split('|')
+        o[int(b)].append(int(a))
+    else:
+        bad = False
+        p = l.split(',')
+        for i in range(len(p)):
+            for j in range(i+1,len(p)):
+                if int(p[j]) in o[int(p[i])]:
+                    bad = True
+                    p[j],p[i] = p[i],p[j]
+        if bad:
+            t += int(p[len(p)//2])
+
+print("5b", t)
