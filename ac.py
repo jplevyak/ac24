@@ -80,7 +80,7 @@ from collections import defaultdict
 t = 0
 u = False
 o = defaultdict(list)
-for l in open("4", "r").readlines():
+for l in open("5", "r").readlines():
     l = l.strip()
     if len(l) < 1:
         u = True
@@ -101,12 +101,12 @@ for l in open("4", "r").readlines():
         if not bad:
             t += int(p[len(p)//2])
 
-print("4a", t)
+print("5a", t)
 
 t = 0
 u = False
 o = defaultdict(list)
-for l in open("4", "r").readlines():
+for l in open("5", "r").readlines():
     l = l.strip()
     if len(l) < 1:
         u = True
@@ -125,4 +125,4 @@ for l in open("4", "r").readlines():
         if bad:
             t += int(p[len(p)//2])
 
-print("4b", t)
+print("5b", t)
